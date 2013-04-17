@@ -12,7 +12,7 @@ import commands
 class MySQLCreationError(Exception):
 	pass
 
-def __create_database(database=None, username=None, password=None):
+def create_database(database=None, username=None, password=None):
 	# Query definitions
 	db_exists	= "select count(*) from information_schema.SCHEMATA \
                                 where SCHEMA_NAME='{0}';".format(database) 
@@ -57,7 +57,7 @@ def __create_database(database=None, username=None, password=None):
 	return True
 
 
-def __create_randompass(length=14, chars=string.ascii_uppercase + string.digits):
+def create_randompass(length=14, chars=string.ascii_uppercase + string.digits):
 	return ''.join(random.choice(chars) for x in range (length))
 
 def __derive_database(sitename=None):
@@ -68,14 +68,14 @@ def __derive_database(sitename=None):
 	sitename = sitename + '_db'
 	return sitename 
 
-def __derive_username(sitename=None):
+def derive_username(sitename=None):
 	sitename = sitename[:11] if len(sitename) > 11 else sitename
 	sitename = re.sub('\.', '', sitename)
 	sitename = sitename + '_user'
 	return sitename
 
 # MySQL Running Check
-def __is_mysql_running():
+def is_mysql_running():
 	# this seems cheap, find a better way to do this
         psaux = commands.getoutput('ps -A');
         psef  = commands.getoutput('ps -ef');
@@ -87,7 +87,7 @@ def __is_mysql_running():
         return False
 
 # MySQL Installation Check
-def __is_mysql_installed():
+def is_mysql_installed():
 	print "Could not connect to MySQL server"
 	print "Attempting to locate binary"
 	binary_check = "mysql"
@@ -106,17 +106,17 @@ def __is_mysql_installed():
 ###
 # Simple test
 ### 
-if __is_mysql_running():
+if is_mysql_running():
 	print "MySQL Creation"
-	new_username = __derive_username(sitename="example.com")
-	new_password = __create_randompass()
-	new_database = __derive_database(sitename="example.com")
-	if __create_database(database=new_database, username=new_username, password=new_password):
+	new_username = derive_username(sitename="example.com")
+	new_password = create_randompass()
+	new_database = derive_database(sitename="example.com")
+	if create_database(database=new_database, username=new_username, password=new_password):
 		print "Database and User creation successful!:\n"
 		print ">> Username:",new_username
 		print ">> Password:",new_password
 		print ">> Database:",new_database
-elif __is_mysql_installed():
+elif is_mysql_installed():
 	print "\nMySQL is installed but not started. Please start the service and retry."
 else:
 	print "Something went horribly, horribly wrong and you should probably just rebuild."
