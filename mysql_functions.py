@@ -36,8 +36,8 @@ def __create_database(database=None, username=None, password=None):
 						username + " exists."})
 		# Check of our database exists on the server
 		cursor.execute(db_exists)
-		count_rows = cursor.fetchone()
-		if count_rows[0] != 0:
+		(count_rows,)=cursor.fetchone()
+		if count_rows != 0:
 			raise DbError({"message": "DB Creation Error: " + \
 						database + " exists."})
 		# Create database 
