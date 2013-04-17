@@ -1,7 +1,7 @@
 JustNginx - An improperly named installation script
 ================================
 
-*[Just Curl](http://justcurl.com/) - currently exists as a combination of PHP and BASH and will be accepting this new version once completed.
+[JustCurl](http://justcurl.com/) - currently exists as a combination of PHP and BASH and will be accepting this new version once completed.
 
 This is an automated script for both virtual host creation in either Nginx or Apache. Other features will be added as we go to eventually encompass the following:
 
