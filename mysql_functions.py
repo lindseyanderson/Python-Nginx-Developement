@@ -69,6 +69,35 @@ def __derive_username(sitename=None):
 	sitename = sitename + '_user'
 	return sitename
 
+# MySQL Running Check
+def __is_mysql_running():
+	# this seems cheap, find a better way to do this
+        psaux = commands.getoutput('ps -A');
+        psef  = commands.getoutput('ps -ef');
+
+        if 'mysql' in psaux:
+                for each_var in string.split(psef, '\n'):
+                        if 'mysql' in each_var:
+                                return True
+        return False
+
+# MySQL Installation Check
+def __is_mysql_installed():
+	# If MySQL is running we'll assume its installed
+        if __is_mysql_running():
+                return True
+        else:
+                binary_check = "mysql"
+`		# attempt to pull the full path from PATH
+                try:
+                        system_which = os.system('which mysql')
+                        return True
+		# this is a last ditch effort.. maybe our path is wrong?
+                except:
+                        for root, directories, files in os.walk('/'):
+                                if binary_check in files:
+                                        return True
+        return False
 #new_username = __derive_username(sitename="dewey.com")
 #new_password = __create_randompass()
 #new_database = __derive_database(sitename="dewey.com")
