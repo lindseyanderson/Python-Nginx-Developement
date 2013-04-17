@@ -5,8 +5,9 @@ Basic MySQL functionality for database creation.  Required input is a site URL.
 
 """
 import MySQLdb as mysql
-import sys, re
+import sys, re, os
 import string, random
+import commands
 
 class MySQLCreationError(Exception):
 	pass
@@ -50,7 +51,7 @@ def __create_database(database=None, username=None, password=None):
 		cursor.execute(flush_privs)
 	except MySQLCreationError, e:
 		msgargs=e.args[0]
-		print msgargs['message']
+		print "\n++ " + msgargs['message']
 		return False
 	cursor.close()	
 	return True
@@ -68,7 +69,7 @@ def __derive_database(sitename=None):
 	return sitename 
 
 def __derive_username(sitename=None):
-	sitename = sitename[:12] if len(sitename) > 12 else sitename
+	sitename = sitename[:11] if len(sitename) > 11 else sitename
 	sitename = re.sub('\.', '', sitename)
 	sitename = sitename + '_user'
 	return sitename
@@ -87,31 +88,35 @@ def __is_mysql_running():
 
 # MySQL Installation Check
 def __is_mysql_installed():
-	# If MySQL is running we'll assume its installed
-        if __is_mysql_running():
+	print "Could not connect to MySQL server"
+	print "Attempting to locate binary"
+	binary_check = "mysql"
+	# attempt to pull the full path from PATH
+        try:
+		print "Binary found:\n"
+                system_which = os.system('which mysql')
                 return True
-        else:
-                binary_check = "mysql"
-		# attempt to pull the full path from PATH
-                try:
-                        system_which = os.system('which mysql')
-                        return True
-		# this is a last ditch effort.. maybe our path is wrong?
-                except:
-                        for root, directories, files in os.walk('/'):
-                                if binary_check in files:
-                                        return True
+	# this is a last ditch effort.. maybe our path is wrong?
+        except:
+                for root, directories, files in os.walk('/'):
+                	if binary_check in files:
+                        	return True
         return False
 
 ###
 # Simple test
 ### 
-#new_username = __derive_username(sitename="dewey.com")
-#new_password = __create_randompass()
-#new_database = __derive_database(sitename="dewey.com")
-#
-#print ">> Username:",new_username
-#print ">> Password:",new_password
-#print ">> Database:",new_database
-#print __create_database(database=new_database, username=new_username, password=new_password)
-
+if __is_mysql_running():
+	print "MySQL Creation"
+	new_username = __derive_username(sitename="linztacomputer.com")
+	new_password = __create_randompass()
+	new_database = __derive_database(sitename="linztacomputer.com")
+	if __create_database(database=new_database, username=new_username, password=new_password):
+		print "Database and User creation successful!:\n"
+		print ">> Username:",new_username
+		print ">> Password:",new_password
+		print ">> Database:",new_database
+elif __is_mysql_installed():
+	print "\nMySQL is installed but not started. Please start the service and retry."
+else:
+	print "Something went horribly, horribly wrong and you should probably just rebuild."
