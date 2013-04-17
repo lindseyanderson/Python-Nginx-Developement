@@ -88,7 +88,7 @@ def __is_mysql_installed():
                 return True
         else:
                 binary_check = "mysql"
-`		# attempt to pull the full path from PATH
+		# attempt to pull the full path from PATH
                 try:
                         system_which = os.system('which mysql')
                         return True
