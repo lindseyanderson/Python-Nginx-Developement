@@ -1,6 +1,6 @@
 JustNginx - An improperly named installation script
 ================================
-* [Just Curl](http://justcurl.com/) Currently exists and will be accepting this new version once completed.
+*[Just Curl](http://justcurl.com/) - Currently exists as a combination of PHP and BASH and will be accepting this new version once completed.
 
 This is an automated script for both virtual host creation in either Nginx or Apache. Other features will be added as we go to eventually encompass the following:
 
@@ -34,3 +34,9 @@ A host header must always be specified when attempting a virtual host installati
 * x-port:    80
 * x-docroot: /var/www/vhosts/%{domain_name}
 * x-install: none
+
+
+Contact
+-------------------------
+
+Email: lindsey.anderson@rackspace.com
