@@ -48,8 +48,9 @@ def __create_database(database=None, username=None, password=None):
 		# Clean it up
 		cursor.execute(flush_privs)
 	except:	
-		pass
+		return False
 	cursor.close()	
+	return True
 
 
 def __create_randompass(length=14, chars=string.ascii_uppercase + string.digits):
@@ -98,6 +99,10 @@ def __is_mysql_installed():
                                 if binary_check in files:
                                         return True
         return False
+
+###
+# Simple test
+### 
 #new_username = __derive_username(sitename="dewey.com")
 #new_password = __create_randompass()
 #new_database = __derive_database(sitename="dewey.com")
