@@ -108,9 +108,9 @@ def __is_mysql_installed():
 ### 
 if __is_mysql_running():
 	print "MySQL Creation"
-	new_username = __derive_username(sitename="linztacomputer.com")
+	new_username = __derive_username(sitename="example.com")
 	new_password = __create_randompass()
-	new_database = __derive_database(sitename="linztacomputer.com")
+	new_database = __derive_database(sitename="example.com")
 	if __create_database(database=new_database, username=new_username, password=new_password):
 		print "Database and User creation successful!:\n"
 		print ">> Username:",new_username
