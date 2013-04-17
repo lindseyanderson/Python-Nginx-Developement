@@ -9,19 +9,19 @@ Features
 -------------------------
 * Apache Virtual Host creation
 
-	*Apache Installation available
+	+ Apache Installation available
 
 * Nginx Virtual Host creation
 
-	*Nginx Installation available
+	+ Nginx Installation available
 
 * MySQL Database creation
 
-	*MySQL Installation available
+	+ MySQL Installation available
 
 * MongoDB Database creation
 
-	 *MongoDB Installation
+	 + MongoDB Installation
 
 * Wordpress installation
 * Drupal installation
