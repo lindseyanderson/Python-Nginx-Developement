@@ -60,7 +60,7 @@ def create_database(database=None, username=None, password=None):
 def create_randompass(length=14, chars=string.ascii_uppercase + string.digits):
 	return ''.join(random.choice(chars) for x in range (length))
 
-def __derive_database(sitename=None):
+def derive_database(sitename=None):
 	# strip the TLD from domain name
 	sitename = sitename[:12] if len(sitename) > 12 else sitename
 	# strip periods, make it easier on mysql
