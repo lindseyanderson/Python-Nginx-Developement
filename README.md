@@ -20,7 +20,7 @@ Usage
 		-H "x-http: apache" \
 		-H "x-port: 80" \
 		-H "x-docroot: /var/www/vhosts/example.com" \
-		-H "x-install: wordpress" justnginx.com)
+		-H "x-install: wordpress" justnginx.com )
 
 
 These headers are likely to change as better ones are thought up.  Check back for current usage. 
