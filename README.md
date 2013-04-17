@@ -8,16 +8,16 @@ This is an automated script for both virtual host creation in either Nginx or Ap
 Features
 -------------------------
 * Apache Virtual Host creation
-	+ Apache Installation available
+	_Apache Installation available_
 
 * Nginx Virtual Host creation
-	+ Nginx Installation available
+	_Nginx Installation available_
 
 * MySQL Database creation
-	+ MySQL Installation available
+	_MySQL Installation available_
 
 * MongoDB Database creation
-	 + MongoDB Installation
+	_MongoDB Installation_
 
 * Wordpress installation
 * Drupal installation
