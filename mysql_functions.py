@@ -8,7 +8,7 @@ import MySQLdb as mysql
 import sys, re
 import string, random
 
-class DbError(Exception):
+class MySQLCreationError(Exception):
 	pass
 
 def __create_database(database=None, username=None, password=None):
@@ -32,13 +32,13 @@ def __create_database(database=None, username=None, password=None):
 		cursor.execute(user_exists)
 		(count_rows,)=cursor.fetchone()
 		if count_rows != 0:
-			raise DbError({"message":"User Creation Error: User " + \
+			raise MySQLCreationError({"message":"User Creation Error: User " + \
 						username + " exists."})
 		# Check of our database exists on the server
 		cursor.execute(db_exists)
 		(count_rows,)=cursor.fetchone()
 		if count_rows != 0:
-			raise DbError({"message": "DB Creation Error: " + \
+			raise MySQLCreationError({"message": "DB Creation Error: " + \
 						database + " exists."})
 		# Create database 
 		cursor.execute(db_create)
@@ -48,7 +48,7 @@ def __create_database(database=None, username=None, password=None):
 		cursor.execute(user_grant)
 		# Clean it up
 		cursor.execute(flush_privs)
-	except DbError, e:
+	except MySQLCreationError, e:
 		msgargs=e.args[0]
 		print msgargs['message']
 		return False
@@ -106,12 +106,12 @@ def __is_mysql_installed():
 ###
 # Simple test
 ### 
-new_username = __derive_username(sitename="dewey.com")
-new_password = __create_randompass()
-new_database = __derive_database(sitename="dewey.com")
+#new_username = __derive_username(sitename="dewey.com")
+#new_password = __create_randompass()
+#new_database = __derive_database(sitename="dewey.com")
 #
-print ">> Username:",new_username
-print ">> Password:",new_password
-print ">> Database:",new_database
-print __create_database(database=new_database, username=new_username, password=new_password)
+#print ">> Username:",new_username
+#print ">> Password:",new_password
+#print ">> Database:",new_database
+#print __create_database(database=new_database, username=new_username, password=new_password)
 
