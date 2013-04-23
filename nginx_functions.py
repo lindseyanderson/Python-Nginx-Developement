@@ -8,7 +8,6 @@
 import os, sys
 import commands
 import fnmatch
-import time
 
 def is_nginx_installed():
 	# First release we'll assume php-fpm is installed
