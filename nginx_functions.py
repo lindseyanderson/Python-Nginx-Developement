@@ -137,6 +137,3 @@ def check_nginxconf_includes():
 
 	# Our include now exists
 	return True
-
-
-print check_nginxconf_includes()
