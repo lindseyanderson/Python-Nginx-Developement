@@ -99,9 +99,8 @@ def check_directories_exist():
 
 
 def check_nginxconf_includes():
-	# Testing purposes
-	input_file = 'nginx.conf'
-	output_file = 'nginx_new.conf'
+	input_file = '/etc/nginx/nginx.conf'
+	output_file = '/etc/nginx/nginx_new.conf'
 	append_line = '    include /etc/nginx/sites-enabled/*;\n'
 
 	# Check for our include line in the nginx configuration
